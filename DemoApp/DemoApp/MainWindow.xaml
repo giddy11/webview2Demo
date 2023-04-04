@@ -1,0 +1,59 @@
+﻿<Window x:Class="DemoApp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DemoApp" xmlns:wpf="clr-namespace:Microsoft.Web.WebView2.Wpf;assembly=Microsoft.Web.WebView2.Wpf"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <!--<DockPanel>
+        <DockPanel DockPanel.Dock="Top">
+            <Button x:Name="ButtonGo" Content="Go" DockPanel.Dock="Right" Click="ButtonGo_Click"/>
+            <TextBox Name="addressBar"/>
+
+            <Button DockPanel.Dock="Right" Content="forward" Width="50"/>
+        </DockPanel>
+
+        <wpf:WebView2 Name="webView" Source="https://www.microsoft.com">
+        </wpf:WebView2>
+    </DockPanel>-->
+
+    <DockPanel>
+        <DockPanel DockPanel.Dock="Top">
+            <Grid>
+                <!--<Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition Width="200"/>
+                    <ColumnDefinition Width="200"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>-->
+                <DockPanel>
+                    <Button Width="60" Height="25"  Content="Back" Grid.Column="1" Click="Button_Click_backward"/>
+                    <Button Width="60" Height="25" Margin="10" Content="Forward" Click="Button_Click_forward"/>
+                    <Button Width="60" Height="25"  Content="Refresh" Grid.Column="1" Click="Button_Click_fontColor"/>
+
+                    <Button Width="120" Height="25"  Content="Change Font Color" Margin="5" Grid.Column="1" Click="Button_Click_fontColor"/>
+                    <Button Width="120" Height="25"  Content="Change Header Text" Grid.Column="1" Click="Button_Click_headerText"/>
+
+                    <TextBox Name="addressBar" Height="25" Width="500" Grid.Column="3" Margin="5"/>
+                    <Button Width="60" Height="25" Content="Go" Click="ButtonGo_Click" Grid.Column="4" Margin="5" DockPanel.Dock="Right"/>
+                </DockPanel>
+            </Grid>
+
+        </DockPanel>
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="600"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <wpf:WebView2 Name="webView" DockPanel.Dock="Left"/>
+            <Label Content="Label" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" FontStyle="Italic" FontSize="20" Foreground="red" x:Name="label1"/>
+        </Grid>
+        
+        
+
+    </DockPanel>
+</Window>

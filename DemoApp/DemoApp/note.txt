@@ -1,0 +1,97 @@
+using Microsoft.Web.WebView2.Core;
+using System;
+using System.Windows;
+
+namespace DemoApp
+{
+    /// <summary>
+    /// Interaction logic for MainWindow.xaml
+    /// </summary>
+    public partial class MainWindow : Window
+    {
+        public MainWindow()
+        {
+            InitializeComponent();
+            //webView.NavigationStarting += EnsureHttps;
+            InitializeAsync();
+        }
+
+        async void InitializeAsync()
+        {
+            await webView.EnsureCoreWebView2Async();
+            //webView.CoreWebView2.Navigate("https://www.facebook.com");
+            //webView.CoreWebView2.Navigate(@"C:\Users\Gideon\Desktop\projects\webview2Demo\DemoApp\index.html");
+
+            // webView.CoreWebView2.WebMessageReceived += UpdateAddressBar;
+
+            //await webView.CoreWebView2.AddScriptToExecuteOnDocumentCreatedAsync("window.chrome.webview.postMessage(window.document.URL);");
+            //await webView.CoreWebView2.AddScriptToExecuteOnDocumentCreatedAsync("window.chrome.webview.addEventListener(\'message\', event => alert(event.data));");
+
+        }
+
+        //private void UpdateAddressBar(object? sender, CoreWebView2WebMessageReceivedEventArgs e)
+        //{
+        //    String uri = e.TryGetWebMessageAsString();
+        //    addressBar.Text = uri;
+        //    webView.CoreWebView2.PostWebMessageAsString(uri);
+        //}
+
+        private void ButtonGo_Click(object sender, RoutedEventArgs e)
+        {
+            //if (webView != null && webView.CoreWebView2 != null)
+            //{
+            //    webView.CoreWebView2.Navigate(addressBar.Text);
+            //}
+
+            if (webView != null && webView.CoreWebView2 != null)
+            {
+                // Prepend "http://" if the input string does not contain a protocol.
+                if (!addressBar.Text.Contains("://"))
+                {
+                    addressBar.Text = "http://" + addressBar.Text;
+                }
+
+                if (Uri.TryCreate(addressBar.Text, UriKind.Absolute, out Uri result))
+                {
+                    webView.CoreWebView2.Navigate(result.ToString());
+                }
+                else
+                {
+                    // Display an error message to the user indicating that the URL is invalid.
+                    MessageBox.Show("Invalid URL.");
+                }
+            }
+        }
+
+        //void EnsureHttps(object sender, CoreWebView2NavigationStartingEventArgs args)
+        //{
+        //    String uri = args.Uri;
+        //    if (!uri.StartsWith("https://"))
+        //    {
+        //        webView.CoreWebView2.ExecuteScriptAsync($"alert('{uri} is not safe, try an https link')");
+        //        args.Cancel = true;
+        //    }
+        //}
+
+        private void Button_Click_backward(object sender, RoutedEventArgs e)
+        {
+            if (webView.CanGoBack)
+            {
+                webView.GoBack();
+            }
+        }
+
+        private void Button_Click_forward(object sender, RoutedEventArgs e)
+        {
+            if (webView.CanGoForward)
+            {
+                webView.GoForward();
+            }
+        }
+
+        private void Button_Click_refresh(object sender, RoutedEventArgs e)
+        {
+            webView.CoreWebView2.Reload();
+        }
+    }
+}
