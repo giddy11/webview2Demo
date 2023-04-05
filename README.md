@@ -1,1 +1,3 @@
-# webview2Demo
+`WebView2` is a browser control that allows you to embed web content in your WPF application. It's based on the Microsoft Edge (Chromium) browser engine and provides a modern and secure browsing experience. With `WebView2`, you can add web-based functionality to your desktop application, such as displaying web pages, running JavaScript code, and interacting with web APIs. You can also customize the appearance of the control to match your application's theme and style. 
+
+Overall, `WebView2` is a powerful tool for creating rich and dynamic desktop applications that leverage web technologies.
