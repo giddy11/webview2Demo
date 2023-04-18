@@ -18,16 +18,32 @@ namespace DemoApp
 
         async void InitializeWebView()
         {
-            //webView.CoreWebView2.Navigate("https://www.facebook.com");
+            webView.NavigationStarting += EnsureHttps;
+
 
             await webView.EnsureCoreWebView2Async();
-            webView.CoreWebView2.WebMessageReceived += webView2_WebMessageReceived;
+            webView.CoreWebView2.Navigate("https://www.facebook.com");
+
+            string fileName = $"{Environment.CurrentDirectory}\\youtube.html";
+            if (File.Exists(fileName))
+            {
+                webView.Source = new Uri($"file://{fileName}");
+            }
+
+            //webView.CoreWebView2.WebMessageReceived += webView2_WebMessageReceived;
 
             // "file://" is a URL prefix that specifies that the file being accessed is a local file.
-            webView.CoreWebView2.Navigate(Path.Combine("file://", Directory.GetCurrentDirectory(), "html", "index.html"));
+            //webView.CoreWebView2.Navigate(Path.Combine("file://", Directory.GetCurrentDirectory(), "html", "index.html"));
+        }
 
-            
-
+        void EnsureHttps(object sender, CoreWebView2NavigationStartingEventArgs args)
+        {
+            String uri = args.Uri;
+            if (!uri.StartsWith("https://"))
+            {
+                webView.CoreWebView2.ExecuteScriptAsync($"alert('{uri} is not safe, try an https link')");
+                args.Cancel = true;
+            }
         }
 
         private void ButtonGo_Click(object sender, RoutedEventArgs e)
@@ -75,7 +91,7 @@ namespace DemoApp
 
         private void Button_Click_fontColor(object sender, RoutedEventArgs e)
         {
-             webView.CoreWebView2.ExecuteScriptAsync("document.getElementById('headerText').style.color = 'red'");
+            webView.CoreWebView2.ExecuteScriptAsync("document.getElementById('headerText').style.color = 'red'");
         }
 
         private void Button_Click_headerText(object sender, RoutedEventArgs e)
@@ -83,35 +99,36 @@ namespace DemoApp
             webView.CoreWebView2.ExecuteScriptAsync("document.getElementById('headerText').innerText = 'HELLO WEBVIEW2 !!!'");
         }
 
-        public void webView2_WebMessageReceived(object sender, CoreWebView2WebMessageReceivedEventArgs e)
-        {
-            string webMessage = e.TryGetWebMessageAsString();
-            MessageBox.Show(webMessage);
+        //public void webView2_WebMessageReceived(object sender, CoreWebView2WebMessageReceivedEventArgs e)
+        //{
+        //    string webMessage = e.TryGetWebMessageAsString();
+        //    MessageBox.Show(webMessage);
 
-            switch (webMessage)
-            {
-                case "beans":
-                    UpdateLabelContent("beans");
-                    break;
+        //    switch (webMessage)
+        //    {
+        //        case "beans":
+        //            UpdateLabelContent("beans");
+        //            break;
 
-                case "rice":
-                    UpdateLabelContent("rice");
-                    break;
+        //        case "rice":
+        //            UpdateLabelContent("rice");
+        //            break;
 
-                case "melon":
-                    UpdateLabelContent("melon");
-                    break;
+        //        case "melon":
+        //            UpdateLabelContent("melon");
+        //            break;
 
-                default:
-                    break;
-            }
-        }
+        //        default:
+        //            break;
+        //    }
+        //}
 
-        private void UpdateLabelContent(string foodName)
-        {
-            string content = $"{foodName} for you my friend";
-            label1.Content = content;
-        }
+        //private void UpdateLabelContent(string foodName)
+        //{
+        //    string content = $"{foodName} for you my friend";
+        //    label1.Content = content;
+        //}
+
 
     }
 }

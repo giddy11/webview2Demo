@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:DemoApp" xmlns:wpf="clr-namespace:Microsoft.Web.WebView2.Wpf;assembly=Microsoft.Web.WebView2.Wpf"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <!--<DockPanel>
+    <DockPanel>
         <DockPanel DockPanel.Dock="Top">
             <Button x:Name="ButtonGo" Content="Go" DockPanel.Dock="Right" Click="ButtonGo_Click"/>
             <TextBox Name="addressBar"/>
@@ -16,18 +16,18 @@
 
         <wpf:WebView2 Name="webView" Source="https://www.microsoft.com">
         </wpf:WebView2>
-    </DockPanel>-->
+    </DockPanel>
 
-    <DockPanel>
+    <!--<DockPanel>
         <DockPanel DockPanel.Dock="Top">
             <Grid>
-                <!--<Grid.ColumnDefinitions>
+                <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="100"/>
                     <ColumnDefinition Width="100"/>
                     <ColumnDefinition Width="200"/>
                     <ColumnDefinition Width="200"/>
                     <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>-->
+                </Grid.ColumnDefinitions>
                 <DockPanel>
                     <Button Width="60" Height="25"  Content="Back" Grid.Column="1" Click="Button_Click_backward"/>
                     <Button Width="60" Height="25" Margin="10" Content="Forward" Click="Button_Click_forward"/>
@@ -49,11 +49,13 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
-            <wpf:WebView2 Name="webView" DockPanel.Dock="Left"/>
+            <wpf:WebView2 Name="webView" DockPanel.Dock="Left" />
             <Label Content="Label" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" FontStyle="Italic" FontSize="20" Foreground="red" x:Name="label1"/>
         </Grid>
-        
-        
 
-    </DockPanel>
+
+
+    </DockPanel>-->
+
+    
 </Window>

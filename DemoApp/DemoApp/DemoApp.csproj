@@ -11,4 +11,10 @@
     <PackageReference Include="Microsoft.Web.WebView2" Version="1.0.1661.34" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="youtube.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>
